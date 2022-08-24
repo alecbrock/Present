@@ -125,7 +125,14 @@ export default function Appbar(props) {
           <Button color="secondary" component={Link} to="/" variant="text">INPUT TITLE</Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button color="inherit" component={Link} to={"/Login"}>Login</Button>
+            <Button color="secondary" component={Link} to={"/Login"} onClick={localStorage.token ? () => {
+              localStorage.removeItem("token");
+              window.location.href = "/Login";
+            }:
+            null
+            }>
+              {localStorage.token ? "Logout" : "Login"}
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
@@ -166,6 +173,6 @@ export default function Appbar(props) {
         <DrawerHeader />
         {children}
       </Box>
-    </Box>
+    </Box >
   )
 }
