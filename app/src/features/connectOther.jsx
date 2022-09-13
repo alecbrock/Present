@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 const ConnectOther = (props) => {
 
-    props.auth();
+    props.authPost();
 
     return(
         <h1>Connect other</h1>

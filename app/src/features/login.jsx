@@ -11,7 +11,7 @@ import {
     Alert
 } from "@mui/material"
 import axios from "axios"
-import { useSelector } from "react-redux"
+
 
 const Login = (props) => {
 
@@ -20,8 +20,13 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [value, setValue] = useState(false);
+
     // let loginMessage = useSelector((state) => state.loginMessage);
-    let users = null;
+    const keyDown = (e) => {
+        if(e.keyCode === 13) {
+            login()
+        }
+    }
 
     const login = () => {
         if (loginOrReg) {
@@ -30,11 +35,9 @@ const Login = (props) => {
                 password
             }).then((user) => {
                 console.log(user.data);
-                users = user.data;
                 localStorage.setItem("token", user.data);
                 localStorage.removeItem("msg");
                 window.location.href = "/";
-                console.log(users);
             }).catch((err) => {
                 console.log(err.response.data.msg);
                 localStorage.removeItem("token")
@@ -117,6 +120,7 @@ const Login = (props) => {
                             defaultValue="Enter your password"
                             variant="outlined"
                             fullWidth
+                            onKeyDown={(e) => keyDown(e)}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </Grid>

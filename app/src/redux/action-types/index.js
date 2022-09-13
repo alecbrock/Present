@@ -1,3 +1,4 @@
 export const ActionTypes = {
-  LOGIN_MESSAGE: "login_message",
+  SET_USER: "set_user",
+  REMOVE_USER: "remove_user",
 }

@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 const MorseCommunication = (props) => {
 
-    props.auth();
+    props.authPost();
 
     return(
         <h1>Morse</h1>

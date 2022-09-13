@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { loginMessageReducer } from "./loginMessageReducer";
+import { userReducer } from "./userReducer";
 const reducers = combineReducers({
-  loginMessage: loginMessageReducer,
+  user: userReducer,
 });
 export default reducers;

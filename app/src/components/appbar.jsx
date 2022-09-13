@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
 
@@ -6,22 +6,36 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 // import AppBar from '@mui/material/AppBar';
 
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import CssBaseline from '@mui/material/CssBaseline';
+import MenuIcon from '@mui/icons-material/Menu';
+import ProfileMenu from './ProfileMenu';
 
+import {
+  Grid,
+  Box,
+  Button,
+  Divider,
+  Modal,
+  TextField,
+  Paper,
+  Typography,
+  Alert,
+  Toolbar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  CssBaseline,
+  Avatar
+} from "@mui/material"
+
+import axios from 'axios';
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -91,9 +105,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
+
+
+
+
 export default function Appbar(props) {
   const theme = useTheme();
   const { children } = props
+  let user = useSelector((state) => state.user);
 
   const [open, setOpen] = React.useState(false);
 
@@ -104,6 +123,8 @@ export default function Appbar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -128,11 +149,16 @@ export default function Appbar(props) {
             <Button color="secondary" component={Link} to={"/Login"} onClick={localStorage.token ? () => {
               localStorage.removeItem("token");
               window.location.href = "/Login";
-            }:
-            null
+            } :
+              null
             }>
               {localStorage.token ? "Logout" : "Login"}
             </Button>
+            {user.name ?
+              <ProfileMenu username={user.name}/> :
+              <Avatar src="/broken-image.jpg" />
+            }
+
           </Box>
         </Toolbar>
       </AppBar>

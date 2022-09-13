@@ -12,9 +12,10 @@ import ConnectSelf from "./features/ConnectSelf"
 import ConnectOther from "./features/ConnectOther"
 import Login from "./features/Login"
 import MorseCommunication from "./features/MorseCommunication"
+import RegisterSteps from "./features/RegisterSteps"
 import axios from "axios"
 import Appbar from "./components/Appbar"
-import RequireAuth from "./RequireAuth"
+import RequireAuthPost from "./RequireAuthPost"
 
 
 
@@ -51,11 +52,12 @@ export default function App(props) {
       <BrowserRouter>
         <Appbar>
           <Routes>
-            <Route path='/' element={<Dashboard auth={RequireAuth} />} />
-            <Route path='/connect_self' element={<ConnectSelf auth={RequireAuth} />} />
-            <Route path='/connect_other' element={<ConnectOther auth={RequireAuth} />} />
+            <Route path='/' element={<Dashboard authPost={RequireAuthPost} />} />
+            <Route path='/connect_self' element={<ConnectSelf authPost={RequireAuthPost} />} />
+            <Route path='/connect_other' element={<ConnectOther authPost={RequireAuthPost} />} />
             <Route path='/login' element={<Login/>} />
-            <Route path='/morse_communication' element={<MorseCommunication auth={RequireAuth} />} />
+            <Route path='/morse_communication' element={<MorseCommunication authPost={RequireAuthPost} />} />
+            <Route path='/register_steps' element={<RegisterSteps/>}/>
           </Routes>
         </Appbar>
       </BrowserRouter>
