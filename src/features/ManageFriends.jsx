@@ -35,7 +35,7 @@ const ManageFriends = (props) => {
     //     }, 300)
     //     return () => clearTimeout(timeout)
     // }, [])
-    // props.authPost()
+    props.authPost()
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     const friendsColor = useSelector((state) => state.friendsColor);

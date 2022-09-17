@@ -43,7 +43,7 @@ const onOrOff = (str) => {
 
 const ConnectSelf = (props) => {
 
-    // props.authPost();
+    props.authPost();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     const lifxState = useSelector((state) => state.lifxState);

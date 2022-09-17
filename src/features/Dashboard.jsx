@@ -84,7 +84,7 @@ const whiteTheme = [
 
 
 const Dashboard = (props) => {
-  // props.authPost();
+  props.authPost();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
