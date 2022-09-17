@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   Grid,
   Box,
-  Button,
-  Divider,
-  Modal,
-  TextField,
   Paper,
-  Typography,
-  Alert,
   IconButton,
   LinearProgress
 } from "@mui/material"
 import axios from "axios"
-import { setUserAction } from '../redux/actions/userActions'
 import { useSelector } from "react-redux";
 import Step from '../components/Step'
 

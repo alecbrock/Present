@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react"
-import axios from 'axios'
+import React, { useState } from "react"
 import {
     Grid,
     Box,
     Button,
-    Divider,
-    Modal,
     TextField,
     Paper,
     Typography,
     Alert,
     IconButton,
-    LinearProgress,
     Switch,
     FormControlLabel,
     Select,
@@ -24,7 +20,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close'
 import { PhotoshopPicker } from 'react-color'
 import Post from "../ApiPost"
-import { setUserAction, updateUserRecentColor, updateUserScene } from '../redux/actions/userActions'
+import { updateUserRecentColor, updateUserScene } from '../redux/actions/userActions'
 import { updateLifxPower } from '../redux/actions/lifxStateActions'
 
 import { useDispatch } from "react-redux"

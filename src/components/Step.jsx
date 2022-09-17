@@ -1,22 +1,8 @@
 import React, {useState} from 'react';
 import {
   Grid,
-  Box,
   Button,
-  Divider,
-  Modal,
   TextField,
-  Paper,
-  Typography,
-  Alert,
-  Toolbar,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  CssBaseline,
-  Avatar
 } from "@mui/material"
 
 const Steps = (props) => {

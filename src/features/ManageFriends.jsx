@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react"
 import { useSelector } from "react-redux";
 import {
     Grid,
     Box,
     Button,
-    Divider,
-    Modal,
     TextField,
     Paper,
     Typography,
-    Alert,
-    IconButton,
-    LinearProgress,
-    Switch,
-    FormControlLabel,
     Select,
     FormControl,
-    InputLabel,
     MenuItem,
-    Slider,
-    Collapse,
     Card,
     CardActions,
     CardContent,
@@ -28,7 +17,7 @@ import {
 } from "@mui/material"
 import Post from "../ApiPost"
 import { useDispatch } from "react-redux"
-import { setUserAction, updateUserFriends } from '../redux/actions/userActions'
+import { updateUserFriends } from '../redux/actions/userActions'
 import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add';
 

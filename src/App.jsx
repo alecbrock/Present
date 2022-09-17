@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
-import { useSelector } from "react-redux"
 // import { RootState } from "./state/reducers"
 import Dashboard from "./features/Dashboard"
 import ConnectSelf from "./features/ConnectSelf"
@@ -13,7 +12,6 @@ import ManageFriends from "./features/ManageFriends"
 import Login from "./features/Login"
 import MorseCommunication from "./features/MorseCommunication"
 import RegisterSteps from "./features/RegisterSteps"
-import axios from "axios"
 import Appbar from "./components/Appbar"
 import RequireAuthPost from "./RequireAuthPost"
 

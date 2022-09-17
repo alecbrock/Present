@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from "react"
-import axios from 'axios'
+import React from "react"
 import {
   Grid,
   Box,
   Button,
   Divider,
-  Modal,
-  TextField,
   Paper,
   Typography,
-  Alert,
-  IconButton,
-  LinearProgress,
-  Switch,
-  FormControlLabel,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Slider,
-  Collapse
+  LinearProgress
 } from "@mui/material"
 import { useSelector } from "react-redux";
 import Post from "../ApiPost"
@@ -97,7 +84,7 @@ const whiteTheme = [
 
 
 const Dashboard = (props) => {
-  props.authPost();
+  // props.authPost();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 

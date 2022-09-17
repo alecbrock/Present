@@ -6,20 +6,13 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
-import Paper from '@mui/material/Paper';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ChromePicker } from 'react-color';
 import Post from '../ApiPost';
-import { setUserAction, updateUserProfileColor } from '../redux/actions/userActions'
+import {  updateUserProfileColor } from '../redux/actions/userActions'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux"
 

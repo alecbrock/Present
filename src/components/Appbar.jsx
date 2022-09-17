@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import Sidebar from './Sidebar'
 
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 // import AppBar from '@mui/material/AppBar';
 
 
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
@@ -15,15 +14,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ProfileMenu from './ProfileMenu';
 
 import {
-  Grid,
   Box,
   Button,
-  Divider,
-  Modal,
-  TextField,
-  Paper,
-  Typography,
-  Alert,
   Toolbar,
   IconButton,
   List,
@@ -34,7 +26,6 @@ import {
   Avatar
 } from "@mui/material"
 
-import axios from 'axios';
 import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
