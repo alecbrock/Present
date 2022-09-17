@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -12,9 +12,25 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ChromePicker } from 'react-color';
+import Post from '../ApiPost';
+import { setUserAction, updateUserProfileColor } from '../redux/actions/userActions'
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux"
 
 export default function ProfileMenu(props) {
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [colorOpen, setColorOpen] = useState(false);
+  const [color, setColor] = useState('');
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,6 +38,16 @@ export default function ProfileMenu(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleColor = (color) => {
+    Post('http://localhost:3002/user/profile_color', {color: color.hex}).then((result) => {
+      console.log(result.user.profileColor)
+      dispatch(updateUserProfileColor(result.user))
+      setColor(color.hex);
+    }).catch((error) => {
+
+    })
+  }
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -35,7 +61,7 @@ export default function ProfileMenu(props) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar style={{ backgroundColor: '#5D3FD3', color: 'white' }}>{`${props.username[0]}${props.username[1]}`}</Avatar>
+            <Avatar style={{ backgroundColor: user.profileColor, color: 'white' }}>{`${props.username[0]}${props.username[1]}`}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -44,7 +70,7 @@ export default function ProfileMenu(props) {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
+        // onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -84,12 +110,19 @@ export default function ProfileMenu(props) {
           </ListItemIcon>
           Register lifx
         </MenuItem>
-        <MenuItem>
+        <MenuItem onMouseEnter={() => setColorOpen(true)} onMouseLeave={() => setColorOpen(false)}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          Profile color
         </MenuItem>
+        {
+          colorOpen ?
+            <div onMouseEnter={() => setColorOpen(true)} onMouseLeave={() => setColorOpen(false)}>
+              <ChromePicker color={color} onChangeComplete={handleColor}/>
+            </div> :
+            null
+        }
       </Menu>
     </React.Fragment>
   );

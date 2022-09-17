@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
 // import { RootState } from "./state/reducers"
 import Dashboard from "./features/Dashboard"
 import ConnectSelf from "./features/ConnectSelf"
-import ConnectOther from "./features/ConnectOther"
+import ManageFriends from "./features/ManageFriends"
 import Login from "./features/Login"
 import MorseCommunication from "./features/MorseCommunication"
 import RegisterSteps from "./features/RegisterSteps"
@@ -54,7 +54,7 @@ export default function App(props) {
           <Routes>
             <Route path='/' element={<Dashboard authPost={RequireAuthPost} />} />
             <Route path='/connect_self' element={<ConnectSelf authPost={RequireAuthPost} />} />
-            <Route path='/connect_other' element={<ConnectOther authPost={RequireAuthPost} />} />
+            <Route path='/manage_friends' element={<ManageFriends authPost={RequireAuthPost} />} />
             <Route path='/login' element={<Login/>} />
             <Route path='/morse_communication' element={<MorseCommunication authPost={RequireAuthPost} />} />
             <Route path='/register_steps' element={<RegisterSteps/>}/>

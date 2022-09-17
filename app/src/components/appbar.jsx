@@ -143,7 +143,7 @@ export default function Appbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Button color="secondary" component={Link} to="/" variant="text">INPUT TITLE</Button>
+          <Button color="secondary" component={Link} to="/" variant="text">PRESENT</Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button color="secondary" component={Link} to={"/Login"} onClick={localStorage.token ? () => {
@@ -178,12 +178,6 @@ export default function Appbar(props) {
             <ListItemText primary={"Connect"} />
           </ListItem>
 
-          <ListItem button component={Link} to={"/connect_other"}>
-            <ListItemIcon>
-              <SettingsInputCompositeIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Connect to other"} />
-          </ListItem>
 
           <ListItem button component={Link} to={"/morse_communication"}>
             <ListItemIcon>
@@ -192,6 +186,12 @@ export default function Appbar(props) {
             <ListItemText primary={"Morse"} />
           </ListItem>
 
+          <ListItem button component={Link} to={"/manage_friends"}>
+            <ListItemIcon>
+              <SettingsInputCompositeIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Manage friends"} />
+          </ListItem>
         </List>
       </Drawer>
 

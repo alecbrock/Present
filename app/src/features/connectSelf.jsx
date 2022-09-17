@@ -24,9 +24,11 @@ import {
 import CloseIcon from '@mui/icons-material/Close'
 import { PhotoshopPicker } from 'react-color'
 import Post from "../ApiPost"
-import { setUserAction } from '../redux/actions/userActions'
-import { useSelector } from "react-redux";
+import { setUserAction, updateUserRecentColor, updateUserScene } from '../redux/actions/userActions'
+import { updateLifxPower } from '../redux/actions/lifxStateActions'
+
 import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux";
 
 
 
@@ -34,6 +36,13 @@ function valuetext(value) {
     return `${value}`;
 }
 
+const onOrOff = (str) => {
+    if (str === "on") {
+        return true;
+    } else if (str === "off") {
+        return false;
+    }
+}
 
 
 const ConnectSelf = (props) => {
@@ -41,15 +50,21 @@ const ConnectSelf = (props) => {
     props.authPost();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
-    const [searchUser, setSearchUser] = useState('');
-    const [colors, setColor] = useState();
-    const [brightness, setBrightness] = useState(100);
-    const [userSelect, setUserSelect] = useState([]);
-    const [value, setValue] = useState(false);
-    const [open, setOpen] = React.useState(true);
+    const lifxState = useSelector((state) => state.lifxState);
 
-    const toggleLight = () => {
-        Post('http://localhost:3002/lifx/toggle', { username: userSelect }).then(() => {
+    const [searchUser, setSearchUser] = useState('');
+    const [colors, setColor] = useState(false);
+    const [brightness, setBrightness] = useState(null);
+    const [userSelect, setUserSelect] = useState(false);
+    const [value, setValue] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [successOpen, setSuccessOpen] = useState(false);
+    const [sceneName, setSceneName] = useState('');
+    // const [switched, setSwitched] = useState(null);
+
+    const toggleLight = (str) => {
+        dispatch(updateLifxPower(str))
+        Post('http://localhost:3002/lifx/toggle', { username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
         }).catch((error) => {
             setValue(!value);
             setOpen(true)
@@ -58,13 +73,17 @@ const ConnectSelf = (props) => {
 
     const handleColor = (color) => {
         setColor(color);
-        Post('http://localhost:3002/lifx/color', { color: color.hex, username: userSelect }).then((result) => {
-            dispatch(setUserAction(result.user));
+        Post('http://localhost:3002/lifx/color', { color: color.hex, username: userSelect ? userSelect : user.name ? user.name : '' }).then((result) => {
+            dispatch(updateUserRecentColor(result.user));
         }).catch((error) => {
             setValue(!value);
             setOpen(true)
         })
     };
+
+    // if (true) {
+    //     console.log('this is the switched', switched)
+    // }
 
 
     //within checkAuth on BE must make request to lifx to find state
@@ -75,7 +94,7 @@ const ConnectSelf = (props) => {
     const handleBrightness = (e) => {
         if (brightness !== e.target.value) {
             setBrightness(e.target.value)
-            Post('http://localhost:3002/lifx/brightness', { brightness: e.target.value, username: userSelect }).then(() => {
+            Post('http://localhost:3002/lifx/brightness', { brightness: e.target.value, username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
             }).catch((error) => {
                 setValue(!value);
                 setOpen(true)
@@ -86,13 +105,26 @@ const ConnectSelf = (props) => {
     const handleSearchUser = (e) => {
         if (e.keyCode === 13) {
             Post('http://localhost:3002/user/search_user', { searchedUsername: searchUser }).then((result) => {
-                dispatch(setUserAction(result.user))
+                setSuccessOpen(true);
             }).catch((error) => {
                 console.log(error, localStorage.msg)
                 setValue(!value)
                 setOpen(true)
             })
         }
+    }
+
+    const handleScene = () => {
+        Post('http://localhost:3002/user/add_scene', {
+            [sceneName]: {
+                color: colors.hex,
+                brightness: brightness
+            }
+        }).then((result) => {
+            dispatch(updateUserScene(result.user))
+        }).catch((error) => {
+            setValue(!value)
+        })
     }
 
 
@@ -129,7 +161,7 @@ const ConnectSelf = (props) => {
 
                 }}
             >
-                    {localStorage.msg ?
+                {localStorage.msg ?
                     <Grid item xs={12}>
                         <Collapse in={open}>
                             <Alert
@@ -152,14 +184,40 @@ const ConnectSelf = (props) => {
                                 {localStorage.msg}
                             </Alert>
                         </Collapse>
-                        </Grid> :
-                        null}
+                    </Grid> :
+                    null}
+                {successOpen ?
+                    <Grid item xs={12}>
+                        <Collapse in={successOpen}>
+                            <Alert
+                                severity="success"
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setSearchUser('')
+                                            setSuccessOpen(false);
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                                sx={{ mb: 2 }}
+                            >
+                                Friend request success!
+                            </Alert>
+                        </Collapse>
+                    </Grid> : null}
 
                 <Paper elevation={0} style={{ display: 'flex', justifyContent: 'center' }}>
                     <Grid container>
 
                         <Grid item xs={2} style={{ paddingTop: 30 }}>
-                            <FormControlLabel labelPlacement="start" onClick={toggleLight} control={<Switch defaultChecked color="secondary" />} label="Toggle light" />
+                            <FormControlLabel labelPlacement="start"
+                            onClick={() => toggleLight(lifxState.power === "on" ? "off" : "on")}
+                            control={<Switch checked={lifxState ? onOrOff(lifxState.power) : false} color="secondary" />} label="Toggle light" />
                         </Grid>
                         <Grid item xs={2} style={{ paddingTop: 20 }}>
 
@@ -169,7 +227,7 @@ const ConnectSelf = (props) => {
                                     labelId="demo-multiple-name-label"
                                     id="demo-multiple-name"
                                     // multiple
-                                    value={userSelect}
+                                    value={userSelect ? userSelect : user.name ? user.name : false}
                                     label="User"
                                     onChange={(e) => setUserSelect(e.target.value)}
                                 >
@@ -186,8 +244,11 @@ const ConnectSelf = (props) => {
                         <Grid item xs={4} style={{ paddingTop: 20, paddingLeft: 10 }}>
                             <TextField fullWidth label='Search user' onKeyDown={(e) => handleSearchUser(e)} onChange={(e) => setSearchUser(e.target.value)}></TextField>
                         </Grid>
-                        <Grid item xs={4} style={{ paddingTop: 30, paddingLeft: 200, justifyContent: 'center' }}>
-                            <Button color="secondary" variant="outlined">
+                        <Grid item xs={2} style={{ paddingTop: 20, paddingLeft: 10, justifyContent: 'center' }}>
+                            <TextField fullWidth label='Enter scene name' onChange={(e) => setSceneName(e.target.value)}></TextField>
+                        </Grid>
+                        <Grid item xs={2} style={{ paddingTop: 30, paddingLeft: 10, justifyContent: 'center' }}>
+                            <Button color="secondary" onClick={handleScene} variant="outlined">
                                 Add as scene
                             </Button>
                         </Grid>
@@ -219,7 +280,7 @@ const ConnectSelf = (props) => {
                             </Typography>
                             <Slider
                                 aria-label="Brightness"
-                                defaultValue={100}
+                                value={brightness ? brightness : lifxState.brightness ? lifxState.brightness * 100 : 100}
                                 getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
                                 color="secondary"
