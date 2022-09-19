@@ -33,7 +33,7 @@ export default function ProfileMenu(props) {
   };
 
   const handleColor = (color) => {
-    Post('http://localhost:3002/user/profile_color', {color: color.hex}).then((result) => {
+    Post('https://past-alec.herokuapp.com/user/profile_color', {color: color.hex}).then((result) => {
       console.log(result.user.profileColor)
       dispatch(updateUserProfileColor(result.user))
       setColor(color.hex);

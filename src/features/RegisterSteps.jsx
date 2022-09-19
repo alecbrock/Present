@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import Step from '../components/Step'
 
 const postLifxID = (id) => {
-  axios.post('http://localhost:3002/user/lifxID',{lifxID: id},{
+  axios.post('https://past-alec.herokuapp.com/user/lifxID',{lifxID: id},{
     headers: {
       'auth-token': localStorage.token
     }}).then((user) => {

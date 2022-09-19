@@ -69,7 +69,7 @@ const ConnectSelf = (props) => {
 
     const handleColor = (color) => {
         setColor(color);
-        Post('http://localhost:3002/lifx/color', { color: color.hex, username: userSelect ? userSelect : user.name ? user.name : '' }).then((result) => {
+        Post('https://past-alec.herokuapp.com/lifx/color', { color: color.hex, username: userSelect ? userSelect : user.name ? user.name : '' }).then((result) => {
             dispatch(updateUserRecentColor(result.user));
         }).catch((error) => {
             setValue(!value);
@@ -90,7 +90,7 @@ const ConnectSelf = (props) => {
     const handleBrightness = (e) => {
         if (brightness !== e.target.value) {
             setBrightness(e.target.value)
-            Post('http://localhost:3002/lifx/brightness', { brightness: e.target.value, username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
+            Post('https://past-alec.herokuapp.com/lifx/brightness', { brightness: e.target.value, username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
             }).catch((error) => {
                 setValue(!value);
                 setOpen(true)
@@ -100,7 +100,7 @@ const ConnectSelf = (props) => {
 
     const handleSearchUser = (e) => {
         if (e.keyCode === 13) {
-            Post('http://localhost:3002/user/search_user', { searchedUsername: searchUser }).then((result) => {
+            Post('https://past-alec.herokuapp.com/user/search_user', { searchedUsername: searchUser }).then((result) => {
                 setSuccessOpen(true);
             }).catch((error) => {
                 console.log(error, localStorage.msg)
@@ -111,7 +111,7 @@ const ConnectSelf = (props) => {
     }
 
     const handleScene = () => {
-        Post('http://localhost:3002/user/add_scene', {
+        Post('https://past-alec.herokuapp.com/user/add_scene', {
             [sceneName]: {
                 color: colors.hex,
                 brightness: brightness

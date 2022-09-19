@@ -90,7 +90,7 @@ const Dashboard = (props) => {
 
 
   const handleColor = (color) => {
-    Post('http://localhost:3002/lifx/dash_color', { color: color }).then((user) => {
+    Post('https://past-alec.herokuapp.com/lifx/dash_color', { color: color }).then((user) => {
 
     }).catch((error) => {
 
@@ -98,7 +98,7 @@ const Dashboard = (props) => {
   };
 
   const handleKelvin = (kelvin) => {
-    Post('http://localhost:3002/lifx/dash_kelvin', { kelvin: kelvin }).then((user) => {
+    Post('https://past-alec.herokuapp.com/lifx/dash_kelvin', { kelvin: kelvin }).then((user) => {
 
     }).catch((error) => {
       console.log(error)
@@ -106,7 +106,7 @@ const Dashboard = (props) => {
   }
 
   const handleRemoveScene = (sceneName) => {
-    Post('http://localhost:3002/user/remove_scene', {sceneName: sceneName}).then((obj) => {
+    Post('https://past-alec.herokuapp.com/user/remove_scene', {sceneName: sceneName}).then((obj) => {
       dispatch(updateUserScene(obj.user))
     }).catch((error) => {
       //setvalue
@@ -114,7 +114,7 @@ const Dashboard = (props) => {
   }
 
   const handleActivateScene = (scene) => {
-    Post('http://localhost:3002/lifx/activate_scene', {scene: scene}).then((obj) => {
+    Post('https://past-alec.herokuapp.com/lifx/activate_scene', {scene: scene}).then((obj) => {
 
     }).catch((error) => {
       //setvalue

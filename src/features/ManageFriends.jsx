@@ -43,7 +43,7 @@ const ManageFriends = (props) => {
     const [search, setSearch] = useState('');
 
     const handleRemoveFriend = (friend) => {
-        Post('http://localhost:3002/user/remove_friend', { friend: friend }).then((result) => {
+        Post('https://past-alec.herokuapp.com/user/remove_friend', { friend: friend }).then((result) => {
             dispatch(updateUserFriends(result.user))
         }).catch((error) => {
 
@@ -51,7 +51,7 @@ const ManageFriends = (props) => {
     }
 
     const handleAddFriend = (friend) => {
-        Post('http://localhost:3002/user/add_friend', { friend: friend }).then((result) => {
+        Post('https://past-alec.herokuapp.com/user/add_friend', { friend: friend }).then((result) => {
             dispatch(updateUserFriends(result.user))
         }).catch((error) => {
 
