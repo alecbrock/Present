@@ -60,7 +60,7 @@ const ConnectSelf = (props) => {
 
     const toggleLight = (str) => {
         dispatch(updateLifxPower(str))
-        Post('http://localhost:3002/lifx/toggle', { username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
+        Post('https://past-alec.herokuapp.com/lifx/toggle', { username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
         }).catch((error) => {
             setValue(!value);
             setOpen(true)

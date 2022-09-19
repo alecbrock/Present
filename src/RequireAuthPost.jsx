@@ -16,13 +16,13 @@ const RequireAuthPost = (props) => {
   useEffect(() => {
 
     const timeout = setTimeout(
-      axios.post('http://localhost:3002/auth/check_auth', {}, {
+      axios.post('https://past-alec.herokuapp.com/auth/check_auth', {}, {
         headers: {
           'auth-token': localStorage.token
         }
       }).then((result) => {
         if (!user) {
-        axios.post('http://localhost:3002/auth/user_info', {}, {
+        axios.post('https://past-alec.herokuapp.com/auth/user_info', {}, {
           headers: {
             'auth-token': localStorage.token
           }

@@ -28,7 +28,7 @@ const Login = (props) => {
 
     const login = () => {
         if (loginOrReg) {
-            axios.post('http://localhost:3002/auth/login', {
+            axios.post('https://past-alec.herokuapp.com/auth/login', {
                 email,
                 password
             }).then((user) => {
@@ -43,7 +43,7 @@ const Login = (props) => {
                 setValue(!value);
             })
         } else {
-            axios.post('http://localhost:3002/auth/register', {
+            axios.post('https://past-alec.herokuapp.com/auth/register', {
                 name,
                 email,
                 password
