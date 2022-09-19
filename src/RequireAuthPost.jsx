@@ -13,22 +13,27 @@ const RequireAuthPost = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  useEffect(() => {
+  function useDebouncedEffect(delay, effect, triggerParams) {
+    useEffect(() => {
+      const timeout = setTimeout(effect, delay)
+      return () => clearTimeout(timeout)
+    }, triggerParams)
+  }
 
-    const timeout = setTimeout(
-      axios.post('https://past-alec.herokuapp.com/auth/check_auth', {}, {
-        headers: {
-          'auth-token': localStorage.token
-        }
-      }).then((result) => {
-        if (!user) {
-        axios.post('https://past-alec.herokuapp.com/auth/user_info', {}, {
+  useDebouncedEffect(300, () => {
+    axios.post('http://localhost:3002/auth/check_auth', {}, {
+      headers: {
+        'auth-token': localStorage.token
+      }
+    }).then((result) => {
+      if (!user) {
+        axios.post('http://localhost:3002/auth/user_info', {}, {
           headers: {
             'auth-token': localStorage.token
           }
         })
-        .then((obj) => {
-          localStorage.removeItem("msg");
+          .then((obj) => {
+            localStorage.removeItem("msg");
             dispatch(setUserAction(obj.data.user));
             dispatch(setFriendsColor(obj.data.colors));
             dispatch(setLifxState(obj.data.state));
@@ -41,16 +46,16 @@ const RequireAuthPost = (props) => {
             window.location.href = "/Login";
             return err.data;
           })
-        }
-        return result.data;
-      }).catch((error) => {
-        localStorage.setItem("msg", error.response.data.msg);
-        localStorage.removeItem("token");
-        window.location.href = "/Login";
-        return error.data;
-      }), 300)
-    return () => clearTimeout(timeout)
-    }, [location])
+      }
+      return result.data;
+    }).catch((error) => {
+      localStorage.setItem("msg", error.response.data.msg);
+      localStorage.removeItem("token");
+      window.location.href = "/Login";
+      return error.data;
+    })
+
+  }, [location])
 }
 
 export default RequireAuthPost
