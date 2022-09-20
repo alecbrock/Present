@@ -73,16 +73,6 @@ const ConnectSelf = (props) => {
         })
     };
 
-    // if (true) {
-    //     console.log('this is the switched', switched)
-    // }
-
-
-    //within checkAuth on BE must make request to lifx to find state
-    //and get wether or not light is on and get color and brightness
-    //to set ui to match
-
-
     const handleBrightness = (e) => {
         if (brightness !== e.target.value) {
             setBrightness(e.target.value)
@@ -115,24 +105,6 @@ const ConnectSelf = (props) => {
             setOpen(true)
         })
     }
-
-
-
-
-    //one possible issue
-    //adding scene
-    //if a different username is selected and the user wishes to add this as a scene
-    //it can either add this to their document regardless or
-    //can send back an error saying to select your username in order to add a scene
-
-    //i would also like to display the users scenes and allow users to delete scenes
-    //material ui cards would be good for this
-    //upon selecting a scene will take the settings from the user object for that scene and make a call to change state of their light
-    //users will have to name scenes in order for me to be able to delete the correct one
-    //the amount of scenes displayed on the dashboard is yet to be determined maybe 4 or 5
-
-
-    //for search user need to make sure that the user searched is real and that it is not already in the users friends list
 
     return (
         <>

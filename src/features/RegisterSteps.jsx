@@ -43,6 +43,9 @@ const RegisterSteps = (props) => {
 
   const steps = [
     {
+      message: user.name.toLowerCase().includes('haleighvanh') ? 'To the light of my life\nPun intended\nI know this distance has been difficult at times\nSo hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on\nI love you so much baby' : null
+    },
+    {
       message: `Welcome ${user.name}`
     },
     {
@@ -62,7 +65,7 @@ const RegisterSteps = (props) => {
       function: postLifxID
     },
     {
-      message: 'Congratulations you are all set :). There are three pages you can go to located on the sidebar. The first is to control your own lightbulb, the second is to control others lightbulb, and the third is morse code communicating through blinks'
+      message: 'Congratulations you are all set :)\nThere are two pages you can go to located on the sidebar\nThe first page is to control your light! You can change the color, brightness, power and create scenes\n Along with controlling another users light if you have them friended\nThe second page is to manage friends and friend request\nYour dashboard will contain the most recent colors you have used along with a collection of warm white colors to cold\nYour Scenes are located on the right. Scenes are a preset of color and brightness etc\nYou can also change your profile color, at the top right'
     }
   ]
   return (

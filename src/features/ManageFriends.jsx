@@ -26,18 +26,6 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 const ManageFriends = (props) => {
-
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         Post('http://localhost:3002/auth/checkAuth_color').then((obj) => {
-    //             dispatch(setUserAction(obj.user.user))
-    //             setFriendColors(obj.user.colors)
-    //         }).catch((error) => {
-
-    //         })
-    //     }, 300)
-    //     return () => clearTimeout(timeout)
-    // }, [])
     props.authPost()
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);

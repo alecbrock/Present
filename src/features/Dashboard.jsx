@@ -17,10 +17,6 @@ import CloseIcon from '@mui/icons-material/Close'
 import { updateUserScene } from '../redux/actions/userActions'
 import { useDispatch } from "react-redux"
 
-//will have default warm colors
-//if no recent colors then display default colors hard coded in react
-//on the right side will be the scenes
-
 
 const whiteTheme = [
   {

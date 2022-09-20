@@ -19,7 +19,6 @@ const Login = (props) => {
     const [password, setPassword] = useState('');
     const [value, setValue] = useState(false);
 
-    // let loginMessage = useSelector((state) => state.loginMessage);
     const keyDown = (e) => {
         if(e.keyCode === 13) {
             login()
