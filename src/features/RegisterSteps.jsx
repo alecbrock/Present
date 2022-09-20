@@ -46,7 +46,7 @@ const RegisterSteps = (props) => {
   const steps = [
     {
       message: user.name.toLowerCase().includes('haleighvanh') ?
-        <Typography style={{ display: 'flex', justifyContent: 'ceter' }}>
+        <Typography style={{ display: 'flex', justifyContent: 'center' }}>
           To the light of my life<br />Pun intended<br />I know this distance has been difficult at times<br />So hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on<br />I love you so much baby
         </Typography> : `Welcome ${user.name}`
     },
@@ -69,7 +69,7 @@ const RegisterSteps = (props) => {
     {
       step: 'Step four',
       message:
-        <Typography style={{ display: 'flex', justifyContent: 'ceter' }}>
+        <Typography style={{ display: 'flex', justifyContent: 'center' }}>
           Congratulations you are all set<br />There are two pages you can go to located on the sidebar<br />The first page is to control your light! You can change the color, brightness, power and create scenes<br />Along with controlling another users light if you have them friended<br />The second page is to manage friends and friend request<br />Your dashboard will contain the most recent colors you have used along with a collection of warm white colors to cold<br />Your Scenes are located on the right. Scenes are a preset of color and brightness etc<br />You can also change your profile color, at the top right
         </Typography>
     }
