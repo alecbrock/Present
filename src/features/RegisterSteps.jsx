@@ -43,10 +43,7 @@ const RegisterSteps = (props) => {
 
   const steps = [
     {
-      message: user.name.toLowerCase().includes('haleighvanh') ? 'To the light of my life\nPun intended\nI know this distance has been difficult at times\nSo hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on\nI love you so much baby' : null
-    },
-    {
-      message: `Welcome ${user.name}`
+      message: user.name.toLowerCase().includes('haleighvanh') ? 'To the light of my life\nPun intended\nI know this distance has been difficult at times\nSo hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on\nI love you so much baby' : `Welcome ${user.name}`
     },
     {
       step: 'Step one',
