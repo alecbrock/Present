@@ -22,7 +22,7 @@ const Steps = (props) => {
        null
       }
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography display="inline">{props.step.message}</Typography>
+        {props.step.message}
       </Grid>
       {!props.step.imagePath ?
       <Grid item xs={12} style={{height: 260}}></Grid>:

@@ -6,21 +6,23 @@ import {
   Box,
   Paper,
   IconButton,
-  LinearProgress
+  LinearProgress,
+  Typography
 } from "@mui/material"
 import axios from "axios"
 import { useSelector } from "react-redux";
 import Step from '../components/Step'
 
 const postLifxID = (id) => {
-  axios.post('https://past-alec.herokuapp.com/user/lifxID',{lifxID: id},{
+  axios.post('https://past-alec.herokuapp.com/user/lifxID', { lifxID: id }, {
     headers: {
       'auth-token': localStorage.token
-    }}).then((user) => {
-      console.log(user);
-    }).catch((err) => {
-      console.log(err);
-    })
+    }
+  }).then((user) => {
+    console.log(user);
+  }).catch((err) => {
+    console.log(err);
+  })
 }
 
 const RegisterSteps = (props) => {
@@ -62,9 +64,13 @@ const RegisterSteps = (props) => {
       function: postLifxID
     },
     {
-      message: 'Congratulations you are all set :)\nThere are two pages you can go to located on the sidebar\nThe first page is to control your light! You can change the color, brightness, power and create scenes\n Along with controlling another users light if you have them friended\nThe second page is to manage friends and friend request\nYour dashboard will contain the most recent colors you have used along with a collection of warm white colors to cold\nYour Scenes are located on the right. Scenes are a preset of color and brightness etc\nYou can also change your profile color, at the top right'
+      message:
+      <Typography>
+        Congratulations you are all set<br />There are two pages you can go to located on the sidebar<br />The first page is to control your light! You can change the color, brightness, power and create scenes<br />Along with controlling another users light if you have them friended<br />The second page is to manage friends and friend request<br />Your dashboard will contain the most recent colors you have used along with a collection of warm white colors to cold<br />Your Scenes are located on the right. Scenes are a preset of color and brightness etc<br />You can also change your profile color, at the top right
+      </Typography>
     }
   ]
+
   return (
     <Box
       sx={{
@@ -84,19 +90,19 @@ const RegisterSteps = (props) => {
         <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
           <Step step={steps[progress - 1]} />
 
-            <Grid item xs={1}>
-              <IconButton onClick={() => handleProgressSub()}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Grid>
-            <Grid item xs={10} style={{ paddingTop: 18 }}>
-              <LinearProgress variant="determinate" color="secondary" value={progress * 20} />
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton onClick={() => handleProgressAdd()}>
-                <ChevronRightIcon />
-              </IconButton>
-            </Grid>
+          <Grid item xs={1}>
+            <IconButton onClick={() => handleProgressSub()}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={10} style={{ paddingTop: 18 }}>
+            <LinearProgress variant="determinate" color="secondary" value={progress * 20} />
+          </Grid>
+          <Grid item xs={1}>
+            <IconButton onClick={() => handleProgressAdd()}>
+              <ChevronRightIcon />
+            </IconButton>
+          </Grid>
 
         </Grid>
       </Paper>
