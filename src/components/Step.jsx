@@ -3,6 +3,7 @@ import {
   Grid,
   Button,
   TextField,
+  Typography
 } from "@mui/material"
 
 const Steps = (props) => {
@@ -21,7 +22,7 @@ const Steps = (props) => {
        null
       }
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-        {props.step.message}
+        <Typography display="inline">{props.step.message}</Typography>
       </Grid>
       {!props.step.imagePath ?
       <Grid item xs={12} style={{height: 260}}></Grid>:
