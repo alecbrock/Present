@@ -12,7 +12,7 @@ const Steps = (props) => {
   return (
     <>
       {props.step.imagePath ?
-       <Grid container direction='column' style={{ dispay: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+       <Grid container style={{ dispay: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <img
           src={props.step.imagePath}
           alt=''
@@ -24,7 +24,7 @@ const Steps = (props) => {
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
         {props.step.message}
       </Grid>
-      {!props.step.imagePath || props.step.step !== 'Step four' ?
+      {!props.step.imagePath ?
       <Grid item xs={12} style={{height: 260}}></Grid> :
       null
       }

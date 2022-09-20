@@ -46,9 +46,9 @@ const RegisterSteps = (props) => {
   const steps = [
     {
       message: user.name.toLowerCase().includes('haleighvanh') ?
-      <Typography style={{display:'flex', justifyContent:'ceter'}}>
-        To the light of my life<br/>Pun intended<br/>I know this distance has been difficult at times<br/>So hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on<br/>I love you so much baby
-      </Typography> :`Welcome ${user.name}`
+        <Typography style={{ display: 'flex', justifyContent: 'ceter' }}>
+          To the light of my life<br />Pun intended<br />I know this distance has been difficult at times<br />So hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on<br />I love you so much baby
+        </Typography> : `Welcome ${user.name}`
     },
     {
       step: 'Step one',
@@ -69,48 +69,82 @@ const RegisterSteps = (props) => {
     {
       step: 'Step four',
       message:
-      <Typography style={{display:'flex', justifyContent:'ceter'}}>
-        Congratulations you are all set<br />There are two pages you can go to located on the sidebar<br />The first page is to control your light! You can change the color, brightness, power and create scenes<br />Along with controlling another users light if you have them friended<br />The second page is to manage friends and friend request<br />Your dashboard will contain the most recent colors you have used along with a collection of warm white colors to cold<br />Your Scenes are located on the right. Scenes are a preset of color and brightness etc<br />You can also change your profile color, at the top right
-      </Typography>
+        <Typography style={{ display: 'flex', justifyContent: 'ceter' }}>
+          Congratulations you are all set<br />There are two pages you can go to located on the sidebar<br />The first page is to control your light! You can change the color, brightness, power and create scenes<br />Along with controlling another users light if you have them friended<br />The second page is to manage friends and friend request<br />Your dashboard will contain the most recent colors you have used along with a collection of warm white colors to cold<br />Your Scenes are located on the right. Scenes are a preset of color and brightness etc<br />You can also change your profile color, at the top right
+        </Typography>
     }
   ]
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          width: 600,
-          height: 400,
-        },
-        justifyContent: 'center',
-        alignItems: 'center',
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          '& > :not(style)': {
+            m: 1,
+            width: 600,
+            height: 400,
+          },
+          justifyContent: 'center',
+          alignItems: 'center',
 
-      }}
-    >
-      <Paper elevation={0} style={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-          <Step step={steps[progress - 1]} />
+        }}
+      >
+        <Paper elevation={0} style={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
+            <Step step={steps[progress - 1]} />
 
-          <Grid item xs={1}>
-            <IconButton onClick={() => handleProgressSub()}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={10} style={{ paddingTop: 18 }}>
-            <LinearProgress variant="determinate" color="secondary" value={progress * 20} />
-          </Grid>
-          <Grid item xs={1}>
-            <IconButton onClick={() => handleProgressAdd()}>
-              <ChevronRightIcon />
-            </IconButton>
-          </Grid>
+            {/* <Grid item xs={1}>
+              <IconButton onClick={() => handleProgressSub()}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={10} style={{ paddingTop: 18 }}>
+              <LinearProgress variant="determinate" color="secondary" value={progress * 20} />
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton onClick={() => handleProgressAdd()}>
+                <ChevronRightIcon />
+              </IconButton>
+            </Grid> */}
 
-        </Grid>
-      </Paper>
-    </Box>
+          </Grid>
+        </Paper>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          '& > :not(style)': {
+            m: 1,
+            width: 600,
+            height: 50,
+          },
+          justifyContent: 'center',
+          alignItems: 'center',
+
+        }}
+      >
+        <Paper>
+          <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid item xs={1}>
+              <IconButton onClick={() => handleProgressSub()}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={10} style={{ paddingTop: 18 }}>
+              <LinearProgress variant="determinate" color="secondary" value={progress * 20} />
+            </Grid>
+            <Grid item xs={1}>
+              <IconButton onClick={() => handleProgressAdd()}>
+                <ChevronRightIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Box>
+    </>
   )
 }
 
