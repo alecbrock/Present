@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   Grid,
   Box,
@@ -6,7 +6,10 @@ import {
   Divider,
   Paper,
   Typography,
-  LinearProgress
+  LinearProgress,
+  Collapse,
+  Alert,
+  IconButton,
 } from "@mui/material"
 import { useSelector } from "react-redux";
 import Post from "../ApiPost"
@@ -87,48 +90,73 @@ const Dashboard = (props) => {
   props.authPost();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [open, setOpen] = useState(false);
 
 
   const handleColor = (color) => {
     Post('https://past-alec.herokuapp.com/lifx/dash_color', { color: color }).then((user) => {
-
     }).catch((error) => {
-
+      setOpen(true)
     })
   };
 
   const handleKelvin = (kelvin) => {
     Post('https://past-alec.herokuapp.com/lifx/dash_kelvin', { kelvin: kelvin }).then((user) => {
-
     }).catch((error) => {
-      console.log(error)
+      setOpen(true)
     })
   }
 
   const handleRemoveScene = (sceneName) => {
-    Post('https://past-alec.herokuapp.com/user/remove_scene', {sceneName: sceneName}).then((obj) => {
+    Post('https://past-alec.herokuapp.com/user/remove_scene', { sceneName: sceneName }).then((obj) => {
       dispatch(updateUserScene(obj.user))
     }).catch((error) => {
-      //setvalue
+      setOpen(true)
     })
   }
 
   const handleActivateScene = (scene) => {
-    Post('https://past-alec.herokuapp.com/lifx/activate_scene', {scene: scene}).then((obj) => {
-
+    Post('https://past-alec.herokuapp.com/lifx/activate_scene', { scene: scene }).then((obj) => {
     }).catch((error) => {
-      //setvalue
+      setOpen(true)
     })
   }
 
   return (
     <>
       <Grid container>
+        {localStorage.msg ?
+          <Grid item xs={12}>
+            <Collapse in={open}>
+              <Alert
+                severity="error"
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      localStorage.removeItem("msg")
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2 }}
+              >
+                {localStorage.msg}
+              </Alert>
+            </Collapse>
+          </Grid> :
+          null}
         <Grid item xs={6}>
 
           <Grid item xs={12}>
             <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-              <Typography variant="h6">Recent colors</Typography>
+              {user.recentColors ?
+                <Typography variant="h6">Recent colors</Typography> :
+                null}
             </Grid>
             <Box
               sx={{
@@ -186,7 +214,8 @@ const Dashboard = (props) => {
         <Grid item xs={6} sx={{ paddingLeft: 3 }}>
           <Grid item xs={12}>
             <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-              <Typography variant="h6">Scenes</Typography>
+              {JSON.stringify(user.scenes) !== '{}' && user ? <Typography variant="h6">Scenes</Typography> :
+                null}
             </Grid>
             <Box
               sx={{

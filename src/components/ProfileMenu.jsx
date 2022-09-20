@@ -23,6 +23,7 @@ export default function ProfileMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [colorOpen, setColorOpen] = useState(false);
   const [color, setColor] = useState('');
+  const [value, setValue] = useState(false);
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -38,7 +39,7 @@ export default function ProfileMenu(props) {
       dispatch(updateUserProfileColor(result.user))
       setColor(color.hex);
     }).catch((error) => {
-
+      setValue(!value)
     })
   }
   return (

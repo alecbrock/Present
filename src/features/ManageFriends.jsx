@@ -13,7 +13,10 @@ import {
     Card,
     CardActions,
     CardContent,
-    Avatar
+    Avatar,
+    Collapse,
+    Alert,
+    IconButton
 } from "@mui/material"
 import Post from "../ApiPost"
 import { useDispatch } from "react-redux"
@@ -41,12 +44,13 @@ const ManageFriends = (props) => {
     const friendsColor = useSelector((state) => state.friendsColor);
     const [type, setType] = useState('friends')
     const [search, setSearch] = useState('');
+    const [open, setOpen] = useState(false);
 
     const handleRemoveFriend = (friend) => {
         Post('https://past-alec.herokuapp.com/user/remove_friend', { friend: friend }).then((result) => {
             dispatch(updateUserFriends(result.user))
         }).catch((error) => {
-
+            setOpen(true)
         })
     }
 
@@ -54,7 +58,7 @@ const ManageFriends = (props) => {
         Post('https://past-alec.herokuapp.com/user/add_friend', { friend: friend }).then((result) => {
             dispatch(updateUserFriends(result.user))
         }).catch((error) => {
-
+            setOpen(true)
         })
     }
 
@@ -79,6 +83,31 @@ const ManageFriends = (props) => {
 
                 }}
             >
+                {localStorage.msg ?
+                    <Grid item xs={12}>
+                        <Collapse in={open}>
+                            <Alert
+                                severity="error"
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            localStorage.removeItem("msg")
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                                sx={{ mb: 2 }}
+                            >
+                                {localStorage.msg}
+                            </Alert>
+                        </Collapse>
+                    </Grid> :
+                    null}
                 <Paper>
                     <Grid container>
                         <Grid item xs={8}>

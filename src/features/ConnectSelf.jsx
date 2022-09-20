@@ -52,17 +52,14 @@ const ConnectSelf = (props) => {
     const [colors, setColor] = useState(false);
     const [brightness, setBrightness] = useState(null);
     const [userSelect, setUserSelect] = useState(false);
-    const [value, setValue] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [successOpen, setSuccessOpen] = useState(false);
     const [sceneName, setSceneName] = useState('');
-    // const [switched, setSwitched] = useState(null);
 
     const toggleLight = (str) => {
         dispatch(updateLifxPower(str))
         Post('https://past-alec.herokuapp.com/lifx/toggle', { username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
         }).catch((error) => {
-            setValue(!value);
             setOpen(true)
         })
     }
@@ -72,7 +69,6 @@ const ConnectSelf = (props) => {
         Post('https://past-alec.herokuapp.com/lifx/color', { color: color.hex, username: userSelect ? userSelect : user.name ? user.name : '' }).then((result) => {
             dispatch(updateUserRecentColor(result.user));
         }).catch((error) => {
-            setValue(!value);
             setOpen(true)
         })
     };
@@ -92,7 +88,6 @@ const ConnectSelf = (props) => {
             setBrightness(e.target.value)
             Post('https://past-alec.herokuapp.com/lifx/brightness', { brightness: e.target.value, username: userSelect ? userSelect : user.name ? user.name : '' }).then(() => {
             }).catch((error) => {
-                setValue(!value);
                 setOpen(true)
             })
         }
@@ -103,8 +98,6 @@ const ConnectSelf = (props) => {
             Post('https://past-alec.herokuapp.com/user/search_user', { searchedUsername: searchUser }).then((result) => {
                 setSuccessOpen(true);
             }).catch((error) => {
-                console.log(error, localStorage.msg)
-                setValue(!value)
                 setOpen(true)
             })
         }
@@ -119,7 +112,7 @@ const ConnectSelf = (props) => {
         }).then((result) => {
             dispatch(updateUserScene(result.user))
         }).catch((error) => {
-            setValue(!value)
+            setOpen(true)
         })
     }
 
