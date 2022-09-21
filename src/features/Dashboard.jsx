@@ -170,7 +170,7 @@ const Dashboard = (props) => {
               }}
             >
 
-              {user.recentColors && JSON.stringify(user.recentColors) !== '{}'?
+              {user.recentColors && user.recentColors.length ?
                 user.recentColors.map((x, i) => (
                   <Paper key={i} sx={{ boxShadow: 3, transition: "transform .2s", backgroundColor: x, "&:hover": { transform: "scale(1.1)", boxShadow: 8 } }} onClick={() => { handleColor(x) }} />
                 )) :
