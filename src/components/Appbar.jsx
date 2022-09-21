@@ -11,6 +11,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
 import MenuIcon from '@mui/icons-material/Menu';
 import ProfileMenu from './ProfileMenu';
+import LeakAddIcon from '@mui/icons-material/LeakAdd';
+import PeopleIcon from '@mui/icons-material/People';
 
 import {
   Box,
@@ -163,22 +165,22 @@ export default function Appbar(props) {
 
           <ListItem button component={Link} to={"/connect_self"}>
             <ListItemIcon>
-              <SettingsInputCompositeIcon />
+              <LeakAddIcon />
             </ListItemIcon>
             <ListItemText primary={"Connect"} />
           </ListItem>
 
 
-          <ListItem button component={Link} to={"/morse_communication"}>
+          {/* <ListItem button component={Link} to={"/morse_communication"}>
             <ListItemIcon>
               <SettingsInputCompositeIcon />
             </ListItemIcon>
             <ListItemText primary={"Morse"} />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem button component={Link} to={"/manage_friends"}>
             <ListItemIcon>
-              <SettingsInputCompositeIcon />
+              <PeopleIcon />
             </ListItemIcon>
             <ListItemText primary={"Manage friends"} />
           </ListItem>

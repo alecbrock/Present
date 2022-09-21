@@ -3,7 +3,6 @@ import {
   Grid,
   Button,
   TextField,
-  Typography
 } from "@mui/material"
 
 const Steps = (props) => {

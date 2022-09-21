@@ -47,7 +47,7 @@ const RegisterSteps = (props) => {
     {
       message: user.name.toLowerCase().includes('haleighvanh') ?
         <Typography style={{ display: 'flex', justifyContent: 'center' }}>
-          To the light of my life<br />Pun intended<br />I know this distance has been difficult at times<br />So hopefully whenever you or I miss eachother we can let one another know by turning eachothers lights on<br />I love you so much baby
+          To the light of my life<br />Pun intended<br />I know this distance has been difficult at times<br />So whenever you or I miss eachother we can let one another know by turning eachothers lights on<br />I love you so much baby
         </Typography> : `Welcome ${user.name}`
     },
     {
