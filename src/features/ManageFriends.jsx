@@ -139,7 +139,7 @@ const ManageFriends = (props) => {
                         {
                             type === 'friends' ?
                                 <>
-                                    {user.friends && user.friends.length ?
+                                    {user.friends && JSON.stringify(user.friends) !== '[]' ?
                                         user.friends.map((x, i) => (
                                             x !== user.name && x.includes(search) ?
                                                 <Grid key={i} item xs={2} style={{ paddingLeft: 20, paddingTop: 20 }}>
@@ -168,7 +168,7 @@ const ManageFriends = (props) => {
                                     }
                                 </> :
                                 <>
-                                    {user.pendingFriends && user.pendingFriends.length ?
+                                    {user.pendingFriends && JSON.stringify(user.pendingFriends) !== '[]' ?
                                         user.pendingFriends.map((x, i) => (
                                             x !== user.name && x.includes(search) ?
                                                 <Grid item key={i} xs={2} style={{ paddingLeft: 20, paddingTop: 20 }}>
