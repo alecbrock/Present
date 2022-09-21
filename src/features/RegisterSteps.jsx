@@ -81,6 +81,7 @@ const RegisterSteps = (props) => {
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
+          borderRadius: '16px',
           '& > :not(style)': {
             m: 1,
             width: 600,
@@ -94,21 +95,6 @@ const RegisterSteps = (props) => {
         <Paper elevation={0} style={{ display: 'flex', justifyContent: 'center' }}>
           <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
             <Step step={steps[progress - 1]} />
-
-            {/* <Grid item xs={1}>
-              <IconButton onClick={() => handleProgressSub()}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Grid>
-            <Grid item xs={10} style={{ paddingTop: 18 }}>
-              <LinearProgress variant="determinate" color="secondary" value={progress * 20} />
-            </Grid>
-            <Grid item xs={1}>
-              <IconButton onClick={() => handleProgressAdd()}>
-                <ChevronRightIcon />
-              </IconButton>
-            </Grid> */}
-
           </Grid>
         </Paper>
       </Box>
@@ -116,6 +102,7 @@ const RegisterSteps = (props) => {
         sx={{
           display: 'flex',
           flexWrap: 'wrap',
+          borderRadius: '16px',
           '& > :not(style)': {
             m: 1,
             width: 600,
