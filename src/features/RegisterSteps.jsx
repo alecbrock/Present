@@ -13,8 +13,8 @@ import axios from "axios"
 import { useSelector } from "react-redux";
 import Step from '../components/Step'
 
-const postLifxID = (id) => {
-  axios.post('https://past-alec.herokuapp.com/user/lifxID', { lifxID: id }, {
+const postLifxID = (obj) => {
+  axios.post('https://past-alec.herokuapp.com/user/lifxID', { lifxID: obj.id, accessToken: obj.accessToken }, {
     headers: {
       'auth-token': localStorage.token
     }

@@ -7,6 +7,7 @@ import {
 
 const Steps = (props) => {
   const [id, setId] = useState('');
+  const [accessToken, setAccessToken] = useState('');
 
   return (
     <>
@@ -30,7 +31,8 @@ const Steps = (props) => {
       {props.step.function ?
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
         <TextField size='small' label='Enter lifx ID' onChange={(e) => setId(e.target.value)}></TextField>
-        <Button color='secondary' onClick={() => props.step.function(id)}>Submit</Button>
+        <TextField size='small' label='Enter access token' onChange={(e) => setAccessToken(e.target.value)}></TextField>
+        <Button color='secondary' onClick={() => props.step.function({id: id, accessToken: accessToken})}>Submit</Button>
       </Grid> :
       null
     }
