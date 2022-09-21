@@ -8,7 +8,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import { styled, useTheme } from '@mui/material/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
 import MenuIcon from '@mui/icons-material/Menu';
 import ProfileMenu from './ProfileMenu';
 import LeakAddIcon from '@mui/icons-material/LeakAdd';
@@ -194,3 +193,5 @@ export default function Appbar(props) {
     </Box >
   )
 }
+
+//MAKE SO PASSWORD IS HIDDEN

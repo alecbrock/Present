@@ -150,7 +150,7 @@ const Dashboard = (props) => {
 
           <Grid item xs={12}>
             <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-              {user.recentColors ?
+              {user.recentColors.length ?
                 <Typography variant="h6">Recent colors</Typography> :
                 null}
             </Grid>
