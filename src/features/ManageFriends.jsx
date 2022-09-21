@@ -139,7 +139,7 @@ const ManageFriends = (props) => {
                         {
                             type === 'friends' ?
                                 <>
-                                    {user.friends ?
+                                    {user.friends && JSON.stringify(user.friends) !== '{}' ?
                                         user.friends.map((x, i) => (
                                             x !== user.name && x.includes(search) ?
                                                 <Grid key={i} item xs={2} style={{ paddingLeft: 20, paddingTop: 20 }}>

@@ -170,7 +170,7 @@ const Dashboard = (props) => {
               }}
             >
 
-              {user.recentColors ?
+              {user.recentColors && JSON.stringify(user.recentColors) !== '{}'?
                 user.recentColors.map((x, i) => (
                   <Paper key={i} sx={{ boxShadow: 3, transition: "transform .2s", backgroundColor: x, "&:hover": { transform: "scale(1.1)", boxShadow: 8 } }} onClick={() => { handleColor(x) }} />
                 )) :
@@ -228,7 +228,7 @@ const Dashboard = (props) => {
               }}
             >
 
-              {JSON.stringify(user.scenes) !== '{}' && user ?
+              {JSON.stringify(user.scenes) !== '{}' && user.scenes ?
                 Object.keys(user.scenes).map((x, i) => {
                   return (
                     <Paper key={i} sx={{ paddingTop: 1, transition: "transform .2s", "&:hover": { transform: "scale(1.1)", boxShadow: 8 } }}>
