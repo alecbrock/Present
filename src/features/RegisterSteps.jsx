@@ -12,23 +12,25 @@ import {
 import axios from "axios"
 import { useSelector } from "react-redux";
 import Step from '../components/Step'
+import env from '../env'
 
-const postLifxID = (obj) => {
-  axios.post('https://past-alec.herokuapp.com/user/lifxID', { lifxID: obj.id, accessToken: obj.accessToken }, {
-    headers: {
-      'auth-token': localStorage.token
-    }
-  }).then((user) => {
-    console.log(user);
-  }).catch((err) => {
-    console.log(err);
-  })
-}
 
 const RegisterSteps = (props) => {
   let user = useSelector((state) => state.user);
-
   let [progress, setProgress] = useState(1);
+  const path = env.enviroment === "development" ? env.development_path : env.production_path;
+
+  const postLifxID = (obj) => {
+    axios.post(`${path}/user/lifxID`, { lifxID: obj.id, accessToken: obj.accessToken }, {
+      headers: {
+        'auth-token': localStorage.token
+      }
+    }).then((user) => {
+      console.log(user);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
   const handleProgressAdd = () => {
     if (progress < 5) {
       setProgress(progress += 1)
@@ -136,3 +138,6 @@ const RegisterSteps = (props) => {
 }
 
 export default RegisterSteps
+
+//update steps to include adding your access token
+//going to website and creting a token

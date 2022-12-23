@@ -11,3 +11,11 @@ const MorseCommunication = (props) => {
 }
 
 export default MorseCommunication
+
+//to tell when new word flash a new color for new word
+//may need to try out fast option in lifx to counteract delay
+//flash a light when incomming morse code
+//this can be achieved by hitting the back end every once in awhile for new information
+//or maybe from websockets idk ill have to look into that
+//once incomming message you will be able to click play message
+//will also keep track of your messages like a voicmail and you can replay them

@@ -13,6 +13,7 @@ import Login from "./features/Login"
 import MorseCommunication from "./features/MorseCommunication"
 import RegisterSteps from "./features/RegisterSteps"
 import Appbar from "./components/Appbar"
+import Community from "./features/Community"
 import RequireAuthPost from "./RequireAuthPost"
 
 
@@ -56,6 +57,7 @@ export default function App(props) {
             <Route path='/login' element={<Login/>} />
             <Route path='/morse_communication' element={<MorseCommunication authPost={RequireAuthPost} />} />
             <Route path='/register_steps' element={<RegisterSteps/>}/>
+            <Route path='/community' element={<Community authPost={RequireAuthPost}/>}/>
           </Routes>
         </Appbar>
       </BrowserRouter>

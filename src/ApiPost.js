@@ -1,8 +1,11 @@
 import axios from 'axios'
+import env from './env'
 
 const Post = async (endpoint, body = null) => {
+  const path = env.enviroment === 'development' ? env.development_path : env.production_path;
+
   return new Promise((resolve, reject) => {
-    axios.post(endpoint, body, {
+    axios.post(`${path}${endpoint}`, body, {
       headers: {
         'auth-token': localStorage.token
       }

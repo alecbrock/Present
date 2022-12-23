@@ -15,8 +15,10 @@ import { useSelector } from "react-redux";
 import Post from "../ApiPost"
 import CloseIcon from '@mui/icons-material/Close'
 import { updateUserScene } from '../redux/actions/userActions'
+import { setCommunityScenes } from '../redux/actions/communityScenesActions'
 import { useDispatch } from "react-redux"
-
+import Scene from '../components/Scene'
+import MessageAlert from "../components/MessageAlert"
 
 const whiteTheme = [
   {
@@ -87,24 +89,24 @@ const Dashboard = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
-
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const handleColor = (color) => {
-    Post('https://past-alec.herokuapp.com/lifx/dash_color', { color: color }).then((user) => {
+    Post('/lifx/dash_color', { color: color }).then((user) => {
     }).catch((error) => {
       setOpen(true)
     })
   };
 
   const handleKelvin = (kelvin) => {
-    Post('https://past-alec.herokuapp.com/lifx/dash_kelvin', { kelvin: kelvin }).then((user) => {
+    Post('/lifx/dash_kelvin', { kelvin: kelvin }).then((user) => {
     }).catch((error) => {
       setOpen(true)
     })
   }
 
   const handleRemoveScene = (sceneName) => {
-    Post('https://past-alec.herokuapp.com/user/remove_scene', { sceneName: sceneName }).then((obj) => {
+    Post('/user/remove_scene', { sceneName: sceneName }).then((obj) => {
       dispatch(updateUserScene(obj.user))
     }).catch((error) => {
       setOpen(true)
@@ -112,7 +114,28 @@ const Dashboard = (props) => {
   }
 
   const handleActivateScene = (scene) => {
-    Post('https://past-alec.herokuapp.com/lifx/activate_scene', { scene: scene }).then((obj) => {
+    console.log(scene);
+    Post('/lifx/activate_scene', { scene: scene }).then((obj) => {
+    }).catch((error) => {
+      setOpen(true)
+    })
+  }
+
+  const handleShareScene = (scene) => {
+    Post('/community/share_scene', scene).then((result) => {
+      setSuccessMessage('Succesfully shared scene!')
+      dispatch(setCommunityScenes(result.user))
+    }).catch((error) => {
+      setOpen(true)
+    })
+  }
+
+  const cancelEffect = (name) => {
+    Post(`/lifx/cancel_effect`, {
+      username: user.name,
+      effectName: name
+    }).then((result) => {
+
     }).catch((error) => {
       setOpen(true)
     })
@@ -121,31 +144,8 @@ const Dashboard = (props) => {
   return (
     <>
       <Grid container>
-        {localStorage.msg ?
-          <Grid item xs={12}>
-            <Collapse in={open}>
-              <Alert
-                severity="error"
-                action={
-                  <IconButton
-                    aria-label="close"
-                    color="inherit"
-                    size="small"
-                    onClick={() => {
-                      localStorage.removeItem("msg")
-                      setOpen(false);
-                    }}
-                  >
-                    <CloseIcon fontSize="inherit" />
-                  </IconButton>
-                }
-                sx={{ mb: 2 }}
-              >
-                {localStorage.msg}
-              </Alert>
-            </Collapse>
-          </Grid> :
-          null}
+        <MessageAlert open={open} setOpen={setOpen} successMessage={successMessage} setSuccessMessage={setSuccessMessage} />
+
         <Grid item xs={6}>
 
           <Grid item xs={12}>
@@ -213,7 +213,12 @@ const Dashboard = (props) => {
               {JSON.stringify(user.scenes) !== '{}' && user ? <Typography variant="h6">Scenes</Typography> :
                 null}
             </Grid>
-            <Box
+
+            {JSON.stringify(user.scenes) !== '{}' && user.scenes ?
+              <Scene scenes={user.scenes} handleActivateScene={handleActivateScene} handleRemoveScene={handleRemoveScene} handleShareScene={handleShareScene} cancelEffect={cancelEffect} />
+              : null}
+
+            {/* <Box
               sx={{
                 display: 'flex',
                 backgroundColor: '#292828',
@@ -262,8 +267,8 @@ const Dashboard = (props) => {
                     </Paper>
                   )
                 })
-                : null}
-            </Box>
+                : null} */}
+            {/* </Box> */}
           </Grid>
         </Grid>
       </Grid>

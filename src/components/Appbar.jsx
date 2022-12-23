@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ProfileMenu from './ProfileMenu';
 import LeakAddIcon from '@mui/icons-material/LeakAdd';
 import PeopleIcon from '@mui/icons-material/People';
+import AppsIcon from '@mui/icons-material/Apps';
 
 import {
   Box,
@@ -147,7 +148,7 @@ export default function Appbar(props) {
             </Button>
             {user.name ?
               <ProfileMenu username={user.name}/> :
-              <Avatar src="/broken-image.jpg" />
+              <Avatar/>
             }
 
           </Box>
@@ -183,6 +184,14 @@ export default function Appbar(props) {
             </ListItemIcon>
             <ListItemText primary={"Manage friends"} />
           </ListItem>
+
+          <ListItem button component={Link} to={"/community"}>
+            <ListItemIcon>
+              <AppsIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Community"} />
+          </ListItem>
+
         </List>
       </Drawer>
 

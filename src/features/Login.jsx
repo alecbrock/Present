@@ -9,7 +9,7 @@ import {
     Alert
 } from "@mui/material"
 import axios from "axios"
-
+import env from '../env'
 
 const Login = (props) => {
 
@@ -18,6 +18,7 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [value, setValue] = useState(false);
+    const path = env.enviroment === "development" ? env.development_path : env.production_path;
 
     const keyDown = (e) => {
         if(e.keyCode === 13) {
@@ -27,7 +28,7 @@ const Login = (props) => {
 
     const login = () => {
         if (loginOrReg) {
-            axios.post('https://past-alec.herokuapp.com/auth/login', {
+            axios.post(`${path}/auth/login`, {
                 email,
                 password
             }).then((user) => {
@@ -42,7 +43,7 @@ const Login = (props) => {
                 setValue(!value);
             })
         } else {
-            axios.post('https://past-alec.herokuapp.com/auth/register', {
+            axios.post(`${path}/auth/register`, {
                 name,
                 email,
                 password

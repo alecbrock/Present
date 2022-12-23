@@ -8,4 +8,7 @@ export const ActionTypes = {
   SET_FRIENDS_COLOR: "set_friends_color",
   SET_LIFX_STATE: "set_lifx_state",
   UPDATE_LIFX_POWER: "update_lifx_power",
+  SET_COMMUNITY_SCENES: "set_community_scenes",
+  SET_EXIT_EFFECT: "set_exit_effect",
+  REMOVE_EXIT_EFFECT: "remove_exit_effect",
 }
