@@ -52,7 +52,7 @@ const Community = (props) => {
       username: user.name,
       effectName: name
     }).then((result) => {
-      setSuccessMessage('looooll')
+      setSuccessMessage('Succesfully canceled effect')
     }).catch((error) => {
       setOpen(true)
     })
