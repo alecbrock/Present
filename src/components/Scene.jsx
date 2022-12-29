@@ -21,6 +21,7 @@ import AirIcon from '@mui/icons-material/Air';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import CycloneIcon from '@mui/icons-material/Cyclone';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 
 const Scene = (props) => {
   const dispatch = useDispatch();
@@ -58,14 +59,14 @@ const Scene = (props) => {
                   <Typography variant="h6">{dashOrCommunity ? currentScene.name : x}</Typography>
                   {
                     currentScene.effect.name === 'Breathe' ?
-                    <AirIcon />
-                    : currentScene.effect.name === 'Pulse' ?
-                    <AutoAwesomeIcon/>
-                    : currentScene.effect.name === 'Candle' ?
-                    <WhatshotIcon/>
-                    : currentScene.effect.name === 'Cycle' ?
-                    <CycloneIcon/>
-                    : null
+                      <AirIcon />
+                      : currentScene.effect.name === 'Pulse' ?
+                        <AutoAwesomeIcon />
+                        : currentScene.effect.name === 'Candle' ?
+                          <WhatshotIcon />
+                          : currentScene.effect.name === 'Cycle' ?
+                            <CycloneIcon />
+                            : null
                   }
 
                 </Grid>
@@ -95,7 +96,8 @@ const Scene = (props) => {
                     } else if (!exitEffect.bool && !effectBool) {
                       props.handleActivateScene(currentScene)
                     } else {
-                      console.log('do an error in here saying to cancel effect')
+                      localStorage.setItem("msg", 'Cancel scene effect first')
+                      props.setOpen(true)
                     }
                   }} />
                   {
@@ -113,7 +115,8 @@ const Scene = (props) => {
                         } else if (!exitEffect.bool && !effectBool) {
                           props.handleActivateScene(currentScene)
                         } else {
-                          console.log('do an error in here saying to cancel effect')
+                          localStorage.setItem("msg", 'Cancel scene effect first')
+                          props.setOpen(true)
                         }
                       }} />
                       : null}
@@ -126,18 +129,34 @@ const Scene = (props) => {
                         <Typography variant="caption" >{`${currentScene.effect.name} Effect`}</Typography>
                       </Grid>
                       <Grid item xs={6}>
-                      <Typography variant="caption">
-                        {currentScene.effect.intensity ?
-                          `Intensity: ${currentScene.effect.intensity / 100}` :
-                          `Period: ${currentScene.effect.period}`
-                        }
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6} sx={{ paddingLeft: 2 }}>
                         <Typography variant="caption">
-                        {`Cycles: ${currentScene.effect.cycles}`}
+                          {currentScene.effect.intensity ?
+                            `Intensity: ${currentScene.effect.intensity / 100}` :
+                            `Period: ${currentScene.effect.period}`
+                          }
                         </Typography>
                       </Grid>
+                      {currentScene.effect.cycles >= 100000 ?
+                        <Grid item xs={6} sx={{ paddingLeft: 2, paddingTop: .3 }}>
+                          <Typography variant="caption" sx={{ paddingTop: 3 }}>
+                            <Grid container>
+
+                              <Grid item xs={6}>
+                                {`Cycles: `}
+
+                              </Grid>
+                              <Grid item xs={6} sx={{ paddingLeft: 1 }} >
+                                <AllInclusiveIcon fontSize="small" />
+                              </Grid>
+                            </Grid>
+                          </Typography>
+                        </Grid> :
+                        <Grid item xs={6} sx={{ paddingLeft: 2 }}>
+                          <Typography variant="caption">
+                            {`Cycles: ${currentScene.effect.cycles}`}
+                          </Typography>
+                        </Grid>
+                      }
                     </Grid>
                     : null}
 
@@ -166,16 +185,16 @@ const Scene = (props) => {
                     <LinearProgress variant="determinate" color="inherit" sx={{ backgroundColor: 'grey' }} value={currentScene.brightness} />
                   </Grid>
 
-                    <Grid item xs={12}>
+                  <Grid item xs={12}>
                     <Divider sx={{ paddingTop: 1 }} />
                   </Grid>
                   <Grid container sx={{ display: 'flex', justifyContent: 'center' }} xs={12}>
-                  {
-                    !dashOrCommunity ?
-                    <Grid item xs={6}>
-                      <Button fullWidth style={{ color: 'white' }} onClick={() => props.handleRemoveScene(dashOrCommunity ? currentScene.name : x)} startIcon={<CloseIcon />} />
-                    </Grid>
-                  :null }
+                    {
+                      !dashOrCommunity ?
+                        <Grid item xs={6}>
+                          <Button fullWidth style={{ color: 'white' }} onClick={() => props.handleRemoveScene(dashOrCommunity ? currentScene.name : x)} startIcon={<CloseIcon />} />
+                        </Grid>
+                        : null}
                     {
                       !dashOrCommunity ?
                         <Grid item xs={6}>

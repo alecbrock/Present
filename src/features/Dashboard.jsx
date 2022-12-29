@@ -215,7 +215,7 @@ const Dashboard = (props) => {
             </Grid>
 
             {JSON.stringify(user.scenes) !== '{}' && user.scenes ?
-              <Scene scenes={user.scenes} handleActivateScene={handleActivateScene} handleRemoveScene={handleRemoveScene} handleShareScene={handleShareScene} cancelEffect={cancelEffect} />
+              <Scene scenes={user.scenes} handleActivateScene={handleActivateScene} handleRemoveScene={handleRemoveScene} handleShareScene={handleShareScene} cancelEffect={cancelEffect} setOpen={setOpen}/>
               : null}
 
             {/* <Box

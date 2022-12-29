@@ -16,7 +16,8 @@ import {
   MenuItem,
   Slider,
   Collapse,
-  Divider
+  Divider,
+  Checkbox
 } from "@mui/material"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux";
@@ -25,7 +26,9 @@ import { setExitEffect, removeExitEffect } from '../redux/actions/exitEffectActi
 const Effect = (props) => {
   const dispatch = useDispatch();
   const exitEffect = useSelector((state) => state.exitEffect);
+  const user = useSelector((state) => state.user);
 
+  // const [infinite, setInfinite] = useState(false);
   function valuetext(value) {
     return `${value}`;
   }
@@ -62,7 +65,10 @@ const Effect = (props) => {
         }
 
         <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', paddingTop: 3 }}>
-          <TextField fullWidth label="Input cycle" onChange={(e) => props.setCycles(e.target.value)} />
+          <TextField fullWidth label={props.cycles ? null : "Input cycle"} value={props.cycles} onChange={(e) => props.setCycles(e.target.value)} />
+        </Grid>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', paddingTop: 3 }}>
+          <FormControlLabel control={<Checkbox onChange={() => props.cycles >= 100000 ? props.setCycles('') : props.setCycles(100000)} checked={props.cycles >= 100000} />} label="INFINITY" />
         </Grid>
         {props.name !== 'Candle' ?
           <Grid item xs={12} sx={{ paddingTop: 3 }}>
@@ -105,8 +111,15 @@ const Effect = (props) => {
               exitEffect.bool === true && exitEffect.location === 'control' ?
                 () => {
                   // let obj = Object.assign({}, props.effectError);
-                  props.cancelEffect(props.name);
-                  dispatch(removeExitEffect());
+                  if (exitEffect.name === props.userSelect) {
+                    props.cancelEffect(props.name);
+                    dispatch(removeExitEffect());
+                  } else {
+                    localStorage.setItem("msg", 'Select user with running effect to cancel');
+                    props.setOpen(true)
+                    // console.log('Select user with running effect to cancel')
+                  }
+
                 } :
                 () => { console.log(exitEffect.bool, exitEffect.location) }
             } sx={{ color: 'white' }}>Cancel Effect</Button>
@@ -114,16 +127,25 @@ const Effect = (props) => {
         <Button fullWidth onClick={
           exitEffect.bool === false ?
             () => {
-              if(props.name === "Candle" || props.name === "Cycle") {
+              if (props.name === "Candle" || props.name === "Cycle") {
                 let obj = Object.assign({}, exitEffect);
                 obj.bool = true
                 obj.location = "control"
                 obj.name = props.userSelect
                 dispatch(setExitEffect(obj));
+                console.log(props.userSelect)
               }
-                props.handleEffect(props.name, { period: Number(props.period), cycles: Number(props.cycles), intensity: props.intensity });
+              props.handleEffect(props.name, { period: Number(props.period), cycles: Number(props.cycles), intensity: props.intensity });
             } :
-            () => { console.log(exitEffect) }
+            () => {
+              if (props.userSelect !== exitEffect.name) {
+                localStorage.setItem("msg", 'Cancel effect for previous user first')
+                props.setOpen(true)
+              } else {
+                localStorage.setItem("msg", 'Cancel previous effect first')
+                props.setOpen(true)
+              }
+            }
         } sx={{ color: "white" }}>Try out effect</Button>
       </Grid>
     </>

@@ -95,7 +95,7 @@ const Login = (props) => {
                             <TextField
                                 label="Username"
                                 id="outlined-size-normal"
-                                defaultValue="Enter your username"
+                                // defaultValue="Enter your username"
                                 variant="outlined"
                                 fullWidth
                                 onChange={(e) => setUsername(e.target.value)}
@@ -105,7 +105,7 @@ const Login = (props) => {
                         <TextField
                             label="Email"
                             id="outlined-size-normal"
-                            defaultValue="Enter your email"
+                            // defaultValue="Enter your email"
                             variant="outlined"
                             fullWidth
                             onChange={(e) => setEmail(e.target.value)}
@@ -115,11 +115,13 @@ const Login = (props) => {
                         <TextField
                             label="Password"
                             id="outlined-size-normal"
-                            defaultValue="Enter your password"
+                            // defaultValue="Enter your password"
                             variant="outlined"
+                            type="password"
                             fullWidth
                             onKeyDown={(e) => keyDown(e)}
                             onChange={(e) => setPassword(e.target.value)}
+                            onEnter={() => login()}
                         />
                     </Grid>
                     <Grid item xs={11}>

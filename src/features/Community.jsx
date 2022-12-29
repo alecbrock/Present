@@ -105,7 +105,7 @@ const Community = (props) => {
 
           {
             JSON.stringify(communityScenes) !== '[]' ?
-              <Scene scenes={communityScenes} handleActivateScene={handleActivateScene} cancelEffect={cancelEffect} />
+              <Scene scenes={communityScenes} handleActivateScene={handleActivateScene} cancelEffect={cancelEffect} setOpen={setOpen} />
               : null
           }
         </Grid>

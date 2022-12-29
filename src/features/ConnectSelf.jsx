@@ -56,11 +56,11 @@ const ConnectSelf = (props) => {
     const [open, setOpen] = React.useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
     const [sceneName, setSceneName] = useState('');
-    const [effect, setEffect] = useState(false);
+    const [effect, setEffect] = useState('');
     const [colorArray, setColorArray] = useState([]);
     const [colorIndex, setColorIndex] = useState(0);
     const [period, setPeriod] = useState(0);
-    const [cycles, setCycles] = useState(0);
+    const [cycles, setCycles] = useState('');
     // const [effectError, setEffectError] = useState({});
     const [intensity, setIntensity] = useState(0);
 
@@ -186,6 +186,8 @@ const ConnectSelf = (props) => {
             setOpen(true)
         })
     }
+
+    console.log(userSelect)
 
     //if effect is selected dont allow handlecolor to send request
 
@@ -347,8 +349,9 @@ const ConnectSelf = (props) => {
                                                         setPeriod={setPeriod}
                                                         setCycles={setCycles}
                                                         setIntensity={setIntensity}
+                                                        setOpen={setOpen}
                                                         // setEffectError={setEffectError}
-                                                        userSelect={props.userSelect ? props.userSelect : user.name ? user.name : false} /> :
+                                                        userSelect={userSelect ? userSelect : user.name ? user.name : false} /> :
                                                     null
 
                                             }
